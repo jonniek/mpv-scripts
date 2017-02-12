@@ -15,10 +15,10 @@ end
 mp.add_key_binding("ctrl+A", "cycleaudiodevice", function()
   if not #devices or not devices then return end
   if #devices ~= index then
-  	index = index + 1
-  	setdevice()
+    index = index + 1
+    setdevice()
   else
-  	index = 1
-  	setdevice()
+    index = 1
+    setdevice()
   end
 end) 

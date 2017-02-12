@@ -10,9 +10,9 @@ function os.capture(cmd, raw)
 end
 
 function append()
-	local url = os.capture('xclip -o -selection clipboard')
-	mp.commandv("loadfile", url, "append-play")
-	mp.osd_message("URL loaded to playlist")
+  local url = os.capture('xclip -o -selection clipboard')
+  mp.commandv("loadfile", url, "append-play")
+  mp.osd_message("URL loaded to playlist")
 end
 
 mp.add_key_binding("a", "appendURL", append)
