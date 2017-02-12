@@ -1,16 +1,16 @@
-A collection of my smaller scripts. Script tags are keybindings you can add to input.conf
+A collection of my smaller scripts. Script tags below are keybindings you can add to input.conf. Lua comments might have details on usage.
   
-###appendUrl
+###[appendUrl](https://github.com/donmaiq/mpv-scripts/blob/master/appendURL.lua)
   Appends url from clipboard to playlist. Requires xclip.  
   `a script-binding appendURL`  
-###cycleaudiodevice
+###[cycleaudiodevice](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)
   Cycles predefined audio devices.  
   `ctrl+A script-binding cycleaudiodevice`  
-###radio
+###[radio](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)
   Loads a radio playlist/file on keybind with ability to save song names into a file.  
   `R script-binding radio-toggle`  
   `r script-binding mark-song`  
-###trashfileonend
+###[trashfileonend](https://github.com/donmaiq/mpv-scripts/blob/master/trashfileonend.lua)
   Removes a local file on end of file. Details inside lua.  
   `ctrl+alt+x script-binding toggledeletefile`  
   `alt+x script-message trashfileonend true true` - deletefile[true, false], oneonly[true, false]  
