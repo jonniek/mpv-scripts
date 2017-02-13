@@ -25,7 +25,6 @@ function on_loaded()
     path = string.sub(fullpath, 1, fullpath:len()-file:len())
 end
 
---if closing reason is not quit and no playlist
 function on_close(reason)
     if reason.reason == 'eof' and settings.load_next_automatically then
         msg.info("Loading next file in directory")
