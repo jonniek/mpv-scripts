@@ -7,7 +7,7 @@ A collection of all my scripts. Small ones are in this repo and bigger ones are 
   Cycles predefined audio devices.  
   `ctrl+A script-binding cycleaudiodevice`  
 ###[nextfile](https://github.com/donmaiq/mpv-scripts/blob/master/nextfile.lua)  
-  Force open next or previous file in the currently playing files directory. Option to set it to automatic on end of file.
+  Force open next or previous file in the currently playing files directory. Toggle/message/set it to automatic on end of file if you'd like.  
   `SHIFT+PGUP script-binding previousfile`  
   `SHIFT+PGDWN script-binding nextfile`  
   `CTRL+N script-binding autonextfiletoggle`  
