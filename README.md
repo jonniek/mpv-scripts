@@ -6,7 +6,8 @@ Script tags below are keybindings you can add to input.conf
   `a script-binding appendURL`  
 ###[cycleaudiodevice](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)
   Cycles predefined audio devices.  
-  `ctrl+A script-binding cycleaudiodevice`  
+  `ctrl+A script-binding cycleaudiodevice`
+  `KEY script-message setaudiodevice argument` - argument is index or nicename of device  
 ###[radio](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)
   Loads a radio playlist/file on keybind with ability to save song names into a file.  
   `R script-binding radio-toggle`  
