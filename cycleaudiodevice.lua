@@ -7,11 +7,13 @@ local devices = {
   { ['name'] = 'pulse/alsa_output.pci-0000_06_00.0.analog-stereo', ['nicename'] = 'speaker' },
 }
 
-function setdevice()
+function setdevice(forceindex)
+  if forceindex then index = tonumber(forceindex) end
   mp.set_property("audio-device", devices[index]['name'])
   mp.osd_message("Audio device set: "..devices[index]['nicename'])
 end
 
+mp.register_script_message("setaudiodevice", setdevice)
 mp.add_key_binding("ctrl+A", "cycleaudiodevice", function()
   if not #devices or not devices then return end
   if #devices ~= index then
