@@ -25,6 +25,6 @@ Script tags below are keybindings you can add to input.conf
   Navigate your local system and open directories or files, or add files to your playlist. Linux/MacOS only.
 ###[waifu2x](https://github.com/donmaiq/mpv-waifu2x)  
   Take screenshots or convert images with waifu2x upscalling algorithm.
-###[nextfile](https://github.com/donmaiq/mpv-scripts/blob/master/nextfile.lua)  
+###[nextfile](https://github.com/donmaiq/mpv-nextfile)  
   Force open next or previous file in the currently playing files directory.  
    
