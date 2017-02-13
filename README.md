@@ -6,8 +6,12 @@ A collection of all my scripts. Small ones are in this repo and bigger ones are 
 ###[cycleaudiodevice](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)
   Cycles predefined audio devices.  
   `ctrl+A script-binding cycleaudiodevice`  
-###[nextfile](https://github.com/donmaiq/mpv-nextfile)  
-  Force open next or previous file in the currently playing files directory.
+###[nextfile](https://github.com/donmaiq/mpv-scripts/blob/master/nextfile.lua)  
+  Force open next or previous file in the currently playing files directory. Option to set it to automatic on end of file.
+  `SHIFT+PGUP script-binding previousfile`  
+  `SHIFT+PGDWN script-binding nextfile`  
+  `CTRL+N script-binding autonextfiletoggle`  
+  `KEY script-message loadnextautomatically [true|false]`  
 ###[radio](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)
   Loads a radio playlist/file on keybind with ability to save song names into a file.  
   `R script-binding radio-toggle`  
