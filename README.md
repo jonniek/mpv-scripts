@@ -1,5 +1,6 @@
-A collection of all my scripts. Small ones are in this repo and bigger ones are linked to. Script tags below are keybindings you can add to input.conf.
+A collection of all my scripts. Small ones are in this repo and bigger ones are linked to.
 ##Small scripts inside this repo
+Script tags below are keybindings you can add to input.conf  
 ###[appendUrl](https://github.com/donmaiq/mpv-scripts/blob/master/appendURL.lua)
   Appends url from clipboard to playlist. Requires xclip.  
   `a script-binding appendURL`  
@@ -7,7 +8,7 @@ A collection of all my scripts. Small ones are in this repo and bigger ones are 
   Cycles predefined audio devices.  
   `ctrl+A script-binding cycleaudiodevice`  
 ###[nextfile](https://github.com/donmaiq/mpv-scripts/blob/master/nextfile.lua)  
-  Force open next or previous file in the currently playing files directory. Toggle/message/set it to automatic on end of file if you'd like. Set filetypes, linux/windows and loop settings inside the variable in lua file.
+  Force open next or previous file in the currently playing files directory. Toggle/message/set it to automatic on end of file if you'd like. Set filetypes, linux/windows and loop settings inside the variable in lua file.  
   `SHIFT+PGUP script-binding previousfile`  
   `SHIFT+PGDWN script-binding nextfile`  
   `CTRL+N script-binding autonextfiletoggle`  
