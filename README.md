@@ -7,12 +7,6 @@ Script tags below are keybindings you can add to input.conf
 ###[cycleaudiodevice](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)
   Cycles predefined audio devices.  
   `ctrl+A script-binding cycleaudiodevice`  
-###[nextfile](https://github.com/donmaiq/mpv-scripts/blob/master/nextfile.lua)  
-  Force open next or previous file in the currently playing files directory. Toggle/message/set it to automatic on end of file if you'd like. Set filetypes, linux/windows and loop settings inside the variable in lua file.  
-  `SHIFT+PGUP script-binding previousfile`  
-  `SHIFT+PGDWN script-binding nextfile`  
-  `CTRL+N script-binding autonextfiletoggle`  
-  `KEY script-message loadnextautomatically [true|false]`  
 ###[radio](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)
   Loads a radio playlist/file on keybind with ability to save song names into a file.  
   `R script-binding radio-toggle`  
@@ -31,5 +25,6 @@ Script tags below are keybindings you can add to input.conf
   Navigate your local system and open directories or files, or add files to your playlist. Linux/MacOS only.
 ###[waifu2x](https://github.com/donmaiq/mpv-waifu2x)  
   Take screenshots or convert images with waifu2x upscalling algorithm.
-    
+###[nextfile](https://github.com/donmaiq/mpv-scripts/blob/master/nextfile.lua)  
+  Force open next or previous file in the currently playing files directory.  
    
