@@ -1,4 +1,9 @@
-A collection of all my scripts. Small ones are in this repo and bigger ones are linked to.
+A collection of all my scripts. Small ones are in this repo and bigger ones are linked to.  
+  
+&nbsp;&nbsp;What are lua scripts? [Mpv.io lua documentation](https://mpv.io/manual/master/#lua-scripting)  
+&nbsp;&nbsp;Where do I put them? [Unix](https://mpv.io/manual/stable/#files) [Windows](https://mpv.io/manual/stable/#files-on-windows)  
+
+
 ##Small scripts inside this repo
 Script tags below are keybindings you can add to input.conf  
 ###[appendUrl](https://github.com/donmaiq/mpv-scripts/blob/master/appendURL.lua)
@@ -28,4 +33,8 @@ Script tags below are keybindings you can add to input.conf
   Take screenshots or convert images with waifu2x upscalling algorithm.
 ###[nextfile](https://github.com/donmaiq/mpv-nextfile)  
   Force open next or previous file in the currently playing files directory.  
-   
+  &nbsp;  
+  &nbsp;  
+>Permission to use, copy, modify, and/or distribute all of this software for any purpose with or without fee is hereby granted  
+
+>All of the software is provided as is and the author disclaims all warranties with regard to this software including all implied warranties of merchantability and fitness. In no event shall the author be liable for any special, direct, indirect, or consequential damages or any damages whatsoever resulting from loss of use, data or profits, whether in an action of contract, negligence or other tortious action, arising out of or in connection with the use or performance of this software.
