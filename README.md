@@ -1,26 +1,26 @@
 A collection of all my scripts. Small ones are in this repo and bigger ones are linked to.  
   
-&nbsp;&nbsp;What are lua scripts? [Mpv.io lua documentation](https://mpv.io/manual/master/#lua-scripting)  
-&nbsp;&nbsp;Where do I put them? [Unix](https://mpv.io/manual/stable/#files) [Windows](https://mpv.io/manual/stable/#files-on-windows)  
+What are lua scripts? [Mpv.io lua documentation](https://mpv.io/manual/master/#lua-scripting)  
+Where should I put them? [Unix](https://mpv.io/manual/stable/#files) [Windows](https://mpv.io/manual/stable/#files-on-windows)  
 
 
 ##Small scripts inside this repo
 Script tags below are keybindings you can add to input.conf  
-###[appendUrl](https://github.com/donmaiq/mpv-scripts/blob/master/appendURL.lua)
-  Appends url from clipboard to playlist. Requires xclip.  
+###[appendUrl.lua](https://github.com/donmaiq/mpv-scripts/blob/master/appendURL.lua)  
+  Appends url from clipboard to playlist.  
   `a script-binding appendURL`  
-###[cycleaudiodevice](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)
+###[cycleaudiodevice.lua](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)  
   Cycles predefined audio devices.  
   `ctrl+A script-binding cycleaudiodevice`  
   `KEY script-message setaudiodevice argument` - argument is index or nicename of device  
-###[radio](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)
+###[radio.lua](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)  
   Loads a radio playlist/file on keybind with ability to save song names into a file.  
   `R script-binding radio-toggle`  
   `r script-binding mark-song`  
-###[trashfileonend](https://github.com/donmaiq/mpv-scripts/blob/master/trashfileonend.lua)
+###[trashfileonend.lua](https://github.com/donmaiq/mpv-scripts/blob/master/trashfileonend.lua)  
   Allows you to remove one or more files after they have ended playing. Settings for different eof-reasons and default behaviour are inside lua settings variable. Use with toggling keybind or send command directly with script message.  
   `ctrl+alt+x script-binding toggledeletefile`  
-  `alt+x script-message trashfileonend true true` - deletefile[true, false], oneonly[true, false]  
+  `KEY script-message trashfileonend true true` - deletefile[true, false], oneonly[true, false]  
   
 ##My bigger scripts
 ###[unseen-playlistmaker](https://github.com/donmaiq/unseen-playlistmaker)
@@ -34,7 +34,7 @@ Script tags below are keybindings you can add to input.conf
 ###[nextfile](https://github.com/donmaiq/mpv-nextfile)  
   Force open next or previous file in the currently playing files directory.  
   &nbsp;  
-  &nbsp;  
+---
 >Permission to use, copy, modify, and/or distribute all of this software for any purpose with or without fee is hereby granted  
 
 >All of the software is provided as is and the author disclaims all warranties with regard to this software including all implied warranties of merchantability and fitness. In no event shall the author be liable for any special, direct, indirect, or consequential damages or any damages whatsoever resulting from loss of use, data or profits, whether in an action of contract, negligence or other tortious action, arising out of or in connection with the use or performance of this software.
