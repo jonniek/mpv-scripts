@@ -1,6 +1,6 @@
 --Author: donmaiq
 --Appends url from clipboard to the playlist
---Requires xclip
+--Requires xclip(linux), powershell(windows), pbpaste(macOS)
 
 --detect_platform() and get_clipboard() copied and edited from:
 --https://github.com/rossy/mpv-repl
