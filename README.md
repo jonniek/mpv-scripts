@@ -2,6 +2,7 @@ A collection of all my scripts. Small ones are in this repo and bigger ones are 
   
 What are lua scripts? [Mpv.io lua documentation](https://mpv.io/manual/master/#lua-scripting)  
 Where should I put them? [Unix](https://mpv.io/manual/stable/#files) [Windows](https://mpv.io/manual/stable/#files-on-windows)  
+How do I use them? Use default keybinds or bind your own in [input.conf](https://mpv.io/manual/stable/#input-conf). Some of my scripts require you to edit some settings in the head of lua files to work.
 
 
 ##Small scripts inside this repo
@@ -10,7 +11,7 @@ Script tags below are keybindings you can add to input.conf
   Appends url from clipboard to playlist.  
   `a script-binding appendURL`  
 ###[cycleaudiodevice.lua](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)  
-  Cycles predefined audio devices.  
+  Cycles predefined audio devices. Created this because updating device name on many places was not convenient. Now I can just call script message with headphones/speakers from different places like for example [context](https://gist.github.com/avih/bee746200b5712220b8bd2f230e535de) menu script. Set devices to match your system before using. `mpv --audio-device=help`  
   `ctrl+A script-binding cycleaudiodevice`  
   `KEY script-message setaudiodevice argument` - argument is index or nicename of device  
 ###[radio.lua](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)  
