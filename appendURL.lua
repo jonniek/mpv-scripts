@@ -3,25 +3,22 @@
 --Requires xclip(linux), powershell(windows), pbpaste(macOS)
 
 --detect_platform() and get_clipboard() copied and edited from:
---https://github.com/rossy/mpv-repl
---repl.lua -- A graphical REPL for mpv input commands
---
--- © 2016, James Ross-Gowan
---
--- Permission to use, copy, modify, and/or distribute this software for any
--- purpose with or without fee is hereby granted, provided that the above
--- copyright notice and this permission notice appear in all copies.
+    --https://github.com/rossy/mpv-repl
+    -- © 2016, James Ross-Gowan
+    --
+    -- Permission to use, copy, modify, and/or distribute this software for any
+    -- purpose with or without fee is hereby granted, provided that the above
+    -- copyright notice and this permission notice appear in all copies.
 
 local utils = require 'mp.utils'
 local msg = require 'mp.msg'
 
 function append(primaryselect)
-  local clipboard = get_clipboard(primaryselect or true)
+  local clipboard = get_clipboard(primaryselect or false)
   if clipboard then
     mp.commandv("loadfile", clipboard, "append-play")
     mp.osd_message("URL appended: "..clipboard)
     msg.info("URL appended: "..clipboard)
-    retried = false
   end
 end
 
@@ -36,15 +33,14 @@ function detect_platform()
 end
 local platform = detect_platform()
 
-local retried = false
-function handleres(res, args)
+--handles the subprocess response table and return clipboard on success
+function handleres(res, args, primary)
   if not res.error and res.status == 0 then
       return res.stdout
   else
     --if clipboard failed try primary selection
-    if platform=='linux' and not retried then 
-      retried = true
-      append(false)
+    if platform=='linux' and not primary then
+      append(true)
       return nil
     end
     if res.error == nil then res.error = "" end
@@ -57,10 +53,10 @@ function handleres(res, args)
   end
 end
 
-function get_clipboard(clip) 
+function get_clipboard(primary) 
   if platform == 'linux' then
-    local args = { 'xclip', '-selection', clip and 'clipboard' or 'primary', '-out' }
-    return handleres(utils.subprocess({ args = args }), args)
+    local args = { 'xclip', '-selection', primary and 'primary' or 'clipboard', '-out' }
+    return handleres(utils.subprocess({ args = args }), args, primary)
   elseif platform == 'windows' then
     local args = {
       'powershell', '-NoProfile', '-Command', [[& {
