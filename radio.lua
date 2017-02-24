@@ -1,6 +1,6 @@
 --Usage: 1. Create a internet-radio playlist in m3u format, see example playlist on github repo
 --       2. Run [ mpv --idle ] and use the shortcut R to launch the radio
---          Optionally you can run [ mpv --script=radio.lua ] and change the load_automatically setting to true
+--          Optionally you can run [ mpv --script-opts=unseenplayliststart=true] to start without input
 
 local settings ={
     vol = '35',                                         --radio start volume
