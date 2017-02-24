@@ -1,18 +1,32 @@
---Author: donmaiq
---Appends url from clipboard to the playlist
---Requires xclip(linux), powershell(windows), pbpaste(macOS)
+-- Author: donmaiq
+-- Appends url from clipboard to the playlist
+-- Requires xclip(linux), powershell(windows), pbpaste(macOS)
 
---detect_platform() and get_clipboard() copied and edited from:
-    --https://github.com/rossy/mpv-repl
+-- detect_platform() and get_clipboard() copied and edited from:
+    -- https://github.com/rossy/mpv-repl
     -- © 2016, James Ross-Gowan
     --
     -- Permission to use, copy, modify, and/or distribute this software for any
     -- purpose with or without fee is hereby granted, provided that the above
     -- copyright notice and this permission notice appear in all copies.
 
+local platform = nil --set to 'linux', 'windows' or 'macos' to override automatic assign
+
+if not platform then
+  local o = {}
+  if mp.get_property_native('options/vo-mmcss-profile', o) ~= o then
+    platform = 'windows'
+  elseif mp.get_property_native('options/input-app-events', o) ~= o then
+    platform = 'macos'
+  else
+    platform = 'linux'
+  end
+end
+
 local utils = require 'mp.utils'
 local msg = require 'mp.msg'
 
+--main function
 function append(primaryselect)
   local clipboard = get_clipboard(primaryselect or false)
   if clipboard then
@@ -22,18 +36,7 @@ function append(primaryselect)
   end
 end
 
-function detect_platform()
-  local o = {}
-  if mp.get_property_native('options/vo-mmcss-profile', o) ~= o then
-    return 'windows'
-  elseif mp.get_property_native('options/input-app-events', o) ~= o then
-    return 'macos'
-  end
-  return 'linux'
-end
-local platform = detect_platform()
-
---handles the subprocess response table and return clipboard on success
+--handles the subprocess response table and return clipboard if it was a success
 function handleres(res, args, primary)
   if not res.error and res.status == 0 then
       return res.stdout
@@ -43,11 +46,10 @@ function handleres(res, args, primary)
       append(true)
       return nil
     end
-    if res.error == nil then res.error = "" end
     msg.error("There was an error getting "..platform.." clipboard: ")
-    msg.error("  Status: "..res.status)
-    msg.error("  Error: "..res.error)
-    msg.error("  stdout: "..res.stdout)
+    msg.error("  Status: "..(res.status or ""))
+    msg.error("  Error: "..(res.error or ""))
+    msg.error("  stdout: "..(res.stdout or ""))
     msg.error("args: "..utils.to_string(args))
     return nil
   end
