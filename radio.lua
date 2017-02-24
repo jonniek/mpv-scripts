@@ -3,8 +3,6 @@
 --          Optionally you can run [ mpv --script=radio.lua ] and change the load_automatically setting to true
 
 local settings ={
-    load_automatically = false,                        --Turn this to true only if you plan to load this script manually,
-                                                          --otherwise all files you open on mpv, will have this playlist added to them
     vol = '35',                                         --radio start volume
     savepath = '/custom/radiosongs',                   --path to saved songs textfile
     playlist = "https://stream.r-a-d.io/main.mp3"     --radio playlist with your channels
@@ -47,6 +45,6 @@ end
 mp.add_key_binding('r', 'mark-song', radiomark)
 mp.add_key_binding('R', 'radio-toggle', radiotoggle)
 
-if settings.load_automatically then
+if mp.get_opt("radiostart") then
     radiotoggle()
 end
