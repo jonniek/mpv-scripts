@@ -13,9 +13,9 @@ local utils = require 'mp.utils'
 local settings = {
   --all settings values need to be true or false
   --deletefile and deleteoneonly in this variable is the default behaviour, both will change when using toggle or message
-  --unix or windows toggle
-  linux = true,
-  --activate file removing when starting mpv, default is good to keep as false
+  --linux(true)/windows(false)/auto(nil)
+  linux = nil,
+  --activate file removing, default is good to keep as false
   deletefile = false,
   --remove only one file(next closed file), changes deletefile to false after deleting one
   deleteoneonly = true,
@@ -33,12 +33,24 @@ local settings = {
     ['unknown']=true, --Unknown. Normally doesn't happen, unless the Lua API is out of sync with the C API.
   }
 }
+--check os
+if settings.linux==nil then
+  local o = {}
+  if mp.get_property_native('options/vo-mmcss-profile', o) ~= o then
+    settings.linux = false
+  else
+    settings.linux = true
+  end
+end
 
 --run when any file is opened
 function on_load()
   local p = mp.get_property("path")
+  if not p then path = nil ; return end
   --get always absolute path to file
   path = utils.join_path(utils.getcwd(), p)
+  --convert slashes to backslashes for windows
+  if settings.linux==false then path = path:gsub("/", "\\") end
   --ignore protocols with more than one character(non windows file systems) ex http://
   if p:match("^%a%a+:%/%/") then path = nil end
 end
@@ -113,4 +125,3 @@ mp.register_script_message("trashfileonend", trashsend)
 mp.add_key_binding("ctrl+alt+x", "toggledeletefile", toggledelete)
 mp.register_event('file-loaded', on_load)
 mp.register_event('end-file', on_close)
-
