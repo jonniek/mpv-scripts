@@ -46,13 +46,12 @@ end
 --run when any file is opened
 function on_load()
   local p = mp.get_property("path")
-  if not p then path = nil ; return end
+  --ignore protocols with more than one character(non windows file systems) ex http://
+  if not p or p:match("^%a%a+:%/%/") then path = nil ; return end
   --get always absolute path to file
   path = utils.join_path(utils.getcwd(), p)
   --convert slashes to backslashes for windows
   if settings.linux==false then path = path:gsub("/", "\\") end
-  --ignore protocols with more than one character(non windows file systems) ex http://
-  if p:match("^%a%a+:%/%/") then path = nil end
 end
 
 --run when any file is closed
