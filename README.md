@@ -13,7 +13,9 @@ Script tags below are keybindings you can add to input.conf
 ###[cycleaudiodevice.lua](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)  
   Cycles predefined audio devices. Created this because updating device name on many places was not convenient. Now I can just call script message with headphones/speakers from different places like for example [context](https://gist.github.com/avih/bee746200b5712220b8bd2f230e535de) menu script and only change them in one place between systems/setups. Set devices to match your system before using with help of `mpv --audio-device=help`. If you toggle only with key consider using a simple input config like `ctrl+A cycle-values audio-device "auto" "openal/device1" "pulse/device2.analog-stereo"` instead of this script.  
   `ctrl+A script-binding cycleaudiodevice`  
-  `KEY script-message setaudiodevice argument` - argument is index or nicename of device  
+  argument below is index or nicename of device  
+  `KEY script-message setaudiodevice argument` - set audio device on runtime  
+  `--script-opts=audio=argument` - set audio device on startup  
 ###[radio.lua](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)  
   Loads a radio playlist/file on keybind with ability to save song names into a file.  
   `R script-binding radio-toggle`  
