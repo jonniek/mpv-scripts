@@ -1,4 +1,6 @@
 --find devices with 'mpv --audio-device=help'
+--set audio device on startup with --script-opts=audio=nicename
+--or set on runtime with --script-message setaudiodevice nicename
 mp.set_property("audio-fallback-to-null", "yes")
 local index = 1
 local devices = {
@@ -25,6 +27,11 @@ function setdevicebymessage(message)
     if not match then index = tonumber(message) end
     setdevice()
   end
+end
+
+deviceonstart = mp.get_opt("audio")
+if deviceonstart then
+    setdevicebymessage(deviceonstart)
 end
 
 mp.register_script_message("setaudiodevice", setdevicebymessage)
