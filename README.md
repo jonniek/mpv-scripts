@@ -16,7 +16,7 @@ Script tags below are keybindings you can add to input.conf
   argument below is index or nicename of device  
   `KEY script-message setaudiodevice argument` - set audio device on runtime  
   `--script-opts=audio=argument` - set audio device on startup  
-### radio.lua](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)  
+### [radio.lua](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)  
   Loads a radio playlist/file on keybind with ability to save song names into a file.  
   `R script-binding radio-toggle`  
   `r script-binding mark-song`  
