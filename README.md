@@ -18,8 +18,9 @@ Script tags below are keybindings you can add to input.conf
   `--script-opts=audio=argument` - set audio device on startup  
 ### [radio.lua](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)  
   Loads a radio playlist/file on keybind with ability to save song names into a file.  
-  `R script-binding radio-toggle`  
+  `R script-binding radio-toggle` - toggle radio on runtime  
   `r script-binding mark-song`  
+  `--script-opts=radiostart=true` - start radio on startup  
 ### [trashfileonend.lua](https://github.com/donmaiq/mpv-scripts/blob/master/trashfileonend.lua)  
   Allows you to remove one or more files after they have ended playing. Settings for different eof-reasons and default behaviour are inside lua settings variable. Use with toggling keybind or send command directly with script message.  
   `ctrl+alt+x script-binding toggledeletefile`  
