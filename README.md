@@ -6,12 +6,13 @@ How do I use them? Use default keybinds or bind your own in [input.conf](https:/
 
 
 ## Small scripts inside this repo
-Script tags below are keybindings you can add to input.conf  
+Script tags below are keybindings you can add to input.conf. Some of my scripts use script-messages for control instead of script-bindings to allow more dynamic commands to be parsed from parameters. You can call script-messages from any other lua script with mp.command("msg"), [mpv-repl](https://github.com/rossy/mpv-repl) by typing or just simply bind them to a key in input.conf.  
+
 ### [appendUrl.lua](https://github.com/donmaiq/mpv-scripts/blob/master/appendURL.lua)  
   Appends url from clipboard to playlist.  
   `a script-binding appendURL`  
 ### [cycleaudiodevice.lua](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)  
-  Cycles predefined audio devices. Created this because updating device name on many places was not convenient. Now I can just call script message with headphones/speakers from different places like for example [context](https://gist.github.com/avih/bee746200b5712220b8bd2f230e535de) menu script and only change them in one place between systems/setups. Set devices to match your system before using with help of `mpv --audio-device=help`. If you toggle only with key consider using a simple input config like `ctrl+A cycle-values audio-device "auto" "openal/device1" "pulse/device2.analog-stereo"` instead of this script.  
+  Cycles predefined audio devices. Created this because updating device name on many places was not convenient. Now I can just call script message with headphones/speakers from different places like for example [context](https://gist.github.com/avih/bee746200b5712220b8bd2f230e535de) menu script or a alias command and only change them in one place between systems/setups. Set devices to match your system before using with help of `mpv --audio-device=help`. If you toggle only with key consider using a simple input config like `ctrl+A cycle-values audio-device "auto" "openal/device1" "pulse/device2.analog-stereo"` instead of this script.  
   `ctrl+A script-binding cycleaudiodevice`  
   argument below is index or nicename of device  
   `KEY script-message setaudiodevice argument` - set audio device on runtime  
@@ -22,9 +23,9 @@ Script tags below are keybindings you can add to input.conf
   `r script-binding mark-song`  
   `--script-opts=radiostart=true` - start radio on startup  
 ### [trashfileonend.lua](https://github.com/donmaiq/mpv-scripts/blob/master/trashfileonend.lua)  
-  Allows you to remove one or more files after they have ended playing. Settings for different eof-reasons and default behaviour are inside lua settings variable. Use with toggling keybind or send command directly with script message.  
+  Allows you to remove one or consecutive files after they have ended playing. Settings for different eof-reasons and default behaviour are inside lua settings variable. Use with toggling keybind or send command directly with script message.  
   `ctrl+alt+x script-binding toggledeletefile`  
-  `KEY script-message trashfileonend true true` - deletefile[true, false], oneonly[true, false]  
+  `script-message trashfileonend true true` - deletefile[true, false], oneonly[true, false]  
   
 ## My bigger scripts
 ### [unseen-playlistmaker](https://github.com/donmaiq/unseen-playlistmaker)
@@ -37,6 +38,7 @@ Script tags below are keybindings you can add to input.conf
   Take screenshots or convert images with waifu2x upscalling algorithm.
 ### [nextfile](https://github.com/donmaiq/mpv-nextfile)  
   Force open next or previous file in the currently playing files directory.  
+  
   &nbsp;  
 ---
 >Permission to use, copy, modify, and/or distribute all of this software for any purpose with or without fee is hereby granted  
