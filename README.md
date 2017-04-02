@@ -2,11 +2,9 @@ A collection of all my scripts. Small ones are in this repo and bigger ones are 
   
 What are lua scripts? [Mpv.io lua documentation](https://mpv.io/manual/master/#lua-scripting)  
 Where should I put them? [Unix](https://mpv.io/manual/stable/#files) [Windows](https://mpv.io/manual/stable/#files-on-windows)  
-How do I use them? Use default keybinds or bind your own in [input.conf](https://mpv.io/manual/stable/#input-conf). Some of my scripts require you to edit some settings in the head of lua files to work.
-
-
-## Small scripts inside this repo
-Script tags below are keybindings you can add to input.conf. Some of my scripts use script-messages for control instead of script-bindings to allow more dynamic commands to be parsed from parameters. You can call script-messages from any other lua script with mp.command("msg"), [mpv-repl](https://github.com/rossy/mpv-repl) by typing or just simply bind them to a key in input.conf.  
+How do I use them? Use default keybinds or bind your own in [input.conf](https://mpv.io/manual/stable/#input-conf). Some of my scripts require you to edit some settings in the head of lua files to work.  
+  
+Some of my scripts use script-messages for control instead of script-bindings to allow more dynamic commands to be parsed from parameters. You can call script-messages from any other lua script with mp.command("msg"), [mpv-repl](https://github.com/rossy/mpv-repl) by typing or just simply bind them to a key in input.conf.  
 
 ### [appendUrl.lua](https://github.com/donmaiq/mpv-scripts/blob/master/appendURL.lua)  
   Appends url from clipboard to playlist.  
