@@ -120,6 +120,11 @@ function trashsend(delete, single)
   output()
 end
 
+if mp.get_opt("trashonend") then
+  settings.deletefile = true
+  output()
+end
+
 mp.register_script_message("trashfileonend", trashsend)
 mp.add_key_binding("ctrl+alt+x", "toggledeletefile", toggledelete)
 mp.register_event('file-loaded', on_load)
