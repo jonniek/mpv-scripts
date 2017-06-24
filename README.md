@@ -9,17 +9,24 @@ Some of my scripts use script-messages for control instead of script-bindings to
 ### [appendUrl.lua](https://github.com/donmaiq/mpv-scripts/blob/master/appendURL.lua)  
   Appends url from clipboard to playlist.  
   `a script-binding appendURL`  
+
+### [customscreenshot.lua](https://github.com/donmaiq/mpv-scripts/blob/master/customscreenshot.lua)  
+  Save screenshots in customized directories based on given conditions such as filename pattern match. Gives a lot of freedom for the user for the expense of requiring some lua knowledge with patterns and strings. Read the lua file settings for more details.   
+  `KEY script-message custom-screenshot [subtitles|video|window]` - take a custom screenshot  
+
 ### [cycleaudiodevice.lua](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)  
   Cycles predefined audio devices. Created this because updating device name on many places was not convenient. Now I can just call script message with headphones/speakers from different places like for example [context](https://gist.github.com/avih/bee746200b5712220b8bd2f230e535de) menu script or a alias command and only change them in one place between systems/setups. Set devices to match your system before using with help of `mpv --audio-device=help`. If you toggle only with key consider using a simple input config like `ctrl+A cycle-values audio-device "auto" "openal/device1" "pulse/device2.analog-stereo"` instead of this script.  
   `ctrl+A script-binding cycleaudiodevice`  
   argument below is index or nicename of device  
   `KEY script-message setaudiodevice argument` - set audio device on runtime  
   `--script-opts=audio=argument` - set audio device on startup  
+
 ### [radio.lua](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)  
   Loads a radio playlist/file on keybind with ability to save song names into a file.  
   `R script-binding radio-toggle` - toggle radio on runtime  
   `r script-binding mark-song`  
   `--script-opts=radiostart=true` - start radio on startup  
+
 ### [trashfileonend.lua](https://github.com/donmaiq/mpv-scripts/blob/master/trashfileonend.lua)  
   Allows you to remove one or consecutive files after they have ended playing. Settings for different eof-reasons and default behaviour are inside lua settings variable. Use with toggling keybind or send command directly with script message.  
   `ctrl+alt+x script-binding toggledeletefile`  
