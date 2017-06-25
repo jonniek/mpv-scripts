@@ -6,12 +6,14 @@ How do I use them? Use default keybinds or bind your own in [input.conf](https:/
   
 Some of my scripts use script-messages for control instead of script-bindings to allow more dynamic commands to be parsed from parameters. You can call script-messages from any other lua script with mp.command("msg"), [mpv-repl](https://github.com/rossy/mpv-repl) by typing or just simply bind them to a key in input.conf.  
 
+If you have problems with any of my scripts or have feature requests feel free to open an issue. Contributions are also welcome.  
+
 ### [appendUrl.lua](https://github.com/donmaiq/mpv-scripts/blob/master/appendURL.lua)  
   Appends url from clipboard to playlist.  
   `a script-binding appendURL`  
 
 ### [customscreenshot.lua](https://github.com/donmaiq/mpv-scripts/blob/master/customscreenshot.lua)  
-  Save screenshots in customized directories based on given conditions such as filename pattern match. Gives a lot of freedom for the user for the expense of requiring some lua knowledge with patterns, strings and mpv lua api. Read the lua file settings for more details.   
+  Save screenshots in customized directories based on given conditions such as filename pattern match. Gives a lot of freedom for the user for the expense of requiring some lua knowledge with patterns, strings and mpv lua api. Read the lua file settings for more details. If you need any help with this script you can open an issue.   
   `KEY script-message custom-screenshot [subtitles|video|window]` - take a custom screenshot  
 
 ### [cycleaudiodevice.lua](https://github.com/donmaiq/mpv-scripts/blob/master/cycleaudiodevice.lua)  
