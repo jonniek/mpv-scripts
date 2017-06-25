@@ -16,13 +16,16 @@ local settings = {
   createdir = { 'mkdir', '-p' }, 
 
   --patterns are in priority order, first match will be used for screenshot
-  --about patterns in lua:
-  --http://lua-users.org/wiki/PatternsTutorial
-  --https://www.lua.org/pil/20.2.html
-  --useful tool to test patterns: https://www.lua.org/demo.html
+  --about patterns in lua: http://lua-users.org/wiki/PatternsTutorial and https://www.lua.org/pil/20.2.html
+  --about strings in lua: http://lua-users.org/wiki/StringLibraryTutorial
+  --useful tool to test patterns and strings: https://www.lua.org/demo.html
   patterns = {
     --you can copy paste the template below and change values to create more rules
-    { 
+    {
+      --This rule will be applied for files containing [SubGroup] in their name
+      --An example filename would be [SubGroup] Show name - 01 [720].mkv
+      --screenshots will be saved in your_screenshots/Show name/Show name - 01/Show name - 01[02m25s].jpg
+
       --this function will be called on file load to determine whether current file is a match for these rules or not
       --return booleanish value(for if statement)
       ['match'] =
@@ -35,14 +38,23 @@ local settings = {
       ['savepath'] =
         function()
           --parse filename to create directory name - note that naming conventions differ so you need to modify this
-          --in this case I parse it so that only the name stays, not creating new folder for every episode
-          --you could also just use a static string, making all screenshots from this match save in same folder
-          local dynamic_directory = mp.get_property('filename/no-ext'):match('%]%s(.*)%s%-%s%d')
+          --in this case I parse it so that files will be added in show_name/show_name_episode/
+          --you can use your imagination when creating this. Having a static string will make all under this rule in same folder
+          --you could even make sub folders inside episode based on duration if you wanted
+
+          --match the show name on a known format because this rule only applies to shows formatted like this
+          local head_dir = mp.get_property('filename/no-ext'):match('%]%s(.*)%s%-%s%d')
+
+          --remove brackets for the subfolder name
+          --instead of match you can also use gsub to strip parts of the filename
+          local sub_dir = mp.get_property('filename/no-ext'):gsub('%s*[%[%(].-[%]%)]%s*', '')
+
+          local relative_dir = utils.join_path(head_dir, sub_dir)
 
           --join and return our custom path with basepath
-          return utils.join_path(mp.get_property('screenshot-directory'), dynamic_directory)
+          return utils.join_path(mp.get_property('screenshot-directory'), relative_dir)
         end
-      ,  
+      ,
 
       --if not nil then overriding default screenshot-template, will property expand
       --needs to be a function that returns the template as a string
@@ -72,16 +84,16 @@ function on_load()
   end
 end
 
-function screenshot(subs)
-  subs = (subs or "")
+function screenshot(param)
+  param = (param or "")
   if state.pattern then
-    custom_screenshot(state.pattern, subs)
+    custom_screenshot(state.pattern, param)
   else
-    mp.commandv("screenshot", subs)
+    mp.command("screenshot "..param)
   end
 end
 
-function custom_screenshot(pattern, subs)
+function custom_screenshot(pattern, param)
   local savepath = pattern.savepath()
 
   --prepare and create/check directory
@@ -98,7 +110,7 @@ function custom_screenshot(pattern, subs)
     mp.set_property("screenshot-directory", savepath)
 
     --take the screenshot
-    mp.commandv("screenshot", subs)
+    mp.command("screenshot "..param)
 
     --reset screenshot settings
     mp.set_property("screenshot-directory", settings.basepath)
