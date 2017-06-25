@@ -40,7 +40,7 @@ local settings = {
           local dynamic_directory = mp.get_property('filename/no-ext'):match('%]%s(.*)%s%-%s%d')
 
           --join and return our custom path with basepath
-          return utils.join_path(settings.basepath, dynamic_directory)
+          return utils.join_path(mp.get_property('screenshot-directory'), dynamic_directory)
         end
       ,  
 
