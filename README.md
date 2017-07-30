@@ -24,10 +24,10 @@ If you have problems with any of my scripts or have feature requests feel free t
   `--script-opts=audio=argument` - set audio device on startup  
 
 ### [radio.lua](https://github.com/donmaiq/mpv-scripts/blob/master/radio.lua)  
-  Loads a radio playlist/file on keybind with ability to save song names into a file.  
+  Loads a radio playlist/file on keybind with ability to save song names into a file. Requires idle or idle=once.  
   `R script-binding radio-toggle` - toggle radio on runtime  
   `r script-binding mark-song`  
-  `--script-opts=radiostart=true` - start radio on startup  
+  `mpv --no-video --idle=once --script-opts=radio-autostart=yes` - start radio on startup  
 
 ### [trashfileonend.lua](https://github.com/donmaiq/mpv-scripts/blob/master/trashfileonend.lua)  
   Allows you to remove one or consecutive files after they have ended playing. Settings for different eof-reasons and default behaviour are inside lua settings variable. Use with toggling keybind or send command directly with script message.  
