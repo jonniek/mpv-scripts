@@ -33,7 +33,7 @@ If you have problems with any of my scripts or have feature requests feel free t
   Allows you to remove one or consecutive files after they have ended playing. Settings for different eof-reasons and default behaviour are inside lua settings variable. Use with toggling keybind or send command directly with script message.  
   `ctrl+alt+x script-binding toggledeletefile`  
   `script-message trashfileonend true true` - deletefile[true, false], oneonly[true, false]  
-  `mpv --script-opts=trashonend=true` - open mpv with deletefile enabled
+  `mpv --script-opts=trashfileonend-deletefile=yes` - open mpv with deletefile enabled
   
 ## My bigger scripts
 ### [unseen-playlistmaker](https://github.com/donmaiq/unseen-playlistmaker)

@@ -13,8 +13,8 @@ local utils = require 'mp.utils'
 local settings = {
   --all settings values need to be true or false
   --deletefile and deleteoneonly in this variable is the default behaviour, both will change when using toggle or message
-  --linux(true)/windows(false)/auto(nil)
-  linux = nil,
+  --linux/windows/auto(empty string)
+  system = "",
   --activate file removing, default is good to keep as false
   deletefile = false,
   --remove only one file(next closed file), changes deletefile to false after deleting one
@@ -33,25 +33,34 @@ local settings = {
     ['unknown']=true, --Unknown. Normally doesn't happen, unless the Lua API is out of sync with the C API.
   }
 }
+local opts = require("mp.options")
+opts.read_options(settings, "trashfileonend")
+
 --check os
-if settings.linux==nil then
+local linux = true
+if settings.system=="" then
   local o = {}
   if mp.get_property_native('options/vo-mmcss-profile', o) ~= o then
-    settings.linux = false
+    linux = false
   else
-    settings.linux = true
+    linux = true
   end
+elseif settings.system:lower()=="linux" then
+  linux = true
+else
+  linux = false
 end
 
 --run when any file is opened
 function on_load()
   local p = mp.get_property("path")
+  if not p then path = nil ; return end
   --ignore protocols with more than one character(non windows file systems) ex http://
-  if not p or p:match("^%a%a+:%/%/") then path = nil ; return end
+  if p:match("^%a%a+:%/%/") then path = nil ; return end
   --get always absolute path to file
   path = utils.join_path(utils.getcwd(), p)
   --convert slashes to backslashes for windows
-  if settings.linux==false then path = path:gsub("/", "\\") end
+  if linux==false then path = path:gsub("/", "\\") end
 end
 
 --run when any file is closed
@@ -63,7 +72,7 @@ function on_close(reason)
     end
     if settings.accepted_reasons[reason.reason] then
       local rm = 'rm'
-      if not settings.linux then rm = 'del' end
+      if not linux then rm = 'del' end
       local response = utils.subprocess({ cancellable=false, args = { rm, path } })
       if response.error == nil and response.status == 0 then
         msg.info('File removed: '..path)
@@ -120,12 +129,8 @@ function trashsend(delete, single)
   output()
 end
 
-if mp.get_opt("trashonend") then
-  settings.deletefile = true
-  output()
-end
-
 mp.register_script_message("trashfileonend", trashsend)
 mp.add_key_binding("ctrl+alt+x", "toggledeletefile", toggledelete)
 mp.register_event('file-loaded', on_load)
 mp.register_event('end-file', on_close)
+
