@@ -7,9 +7,10 @@
 
 local settings = {
     autostart = false, --setting to start on mpv start, requires --idle=once or --idle=yes
+    autosave = false, --save songs automatically without input
     vol = 70, --radio start volume
     savepath = "/home/anon/radiosongs", --path to saved songs file
-    playlist = "/home/anon/radio.m3u" --radio playlist with your channels
+    playlist = "/home/anon/radio.m3u" --radio playlist with your channels, or url incase of 1 channel only
 }
 
 require 'mp.options'
@@ -34,19 +35,35 @@ function radiomark()
   local songname = mp.get_property('media-title')
   local filename = mp.get_property('filename')
   if songname ~= filename then
-    local file = io.open(settings.savepath, "a+")
-    if file then 
-      file:write(songname, "\n")
-      msg.info('Saved: '..songname)
-      file:close()
-    else
-      msg.error("Failed to open savepath, check path and permissions")
+    if settings.autosave then 
+      msg.error("Autosave is on, names are saved without input")
+      return
     end
+    write(songname)
   else
-    msg.error("No title available") 
+    msg.error("No media title available") 
   end
 end
 
+function write(songname)
+  local file = io.open(settings.savepath, "a+")
+  if file then 
+    file:write(songname, "\n")
+    msg.info('Saved: '..songname)
+    file:close()
+  else
+    msg.error("Failed to open savepath, check path and permissions")
+  end
+end
+
+function titlechanged(_, title)
+  local f = mp.get_property('filename')
+  if title ~= f and settings.autosave then
+    write(title)
+  end
+end
+
+mp.observe_property('media-title', "string", titlechanged)
 mp.add_key_binding('r', 'mark-song', radiomark)
 mp.add_key_binding('R', 'radio-toggle', radiotoggle)
 
