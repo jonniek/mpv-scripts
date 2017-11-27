@@ -57,6 +57,7 @@ function write(songname)
 end
 
 function titlechanged(_, title)
+  if not radio_playing then return end
   local f = mp.get_property('filename')
   if title ~= f and settings.autosave then
     write(title)
