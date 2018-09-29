@@ -2,9 +2,10 @@ A collection of all my scripts. Small ones are in this repo and bigger ones are 
   
 What are lua scripts? [Mpv.io lua documentation](https://mpv.io/manual/master/#lua-scripting)  
 Where should I put them? [Unix](https://mpv.io/manual/stable/#files) [Windows](https://mpv.io/manual/stable/#files-on-windows)  
-How do I use them? Use default keybinds or bind your own in [input.conf](https://mpv.io/manual/stable/#input-conf). Some of my scripts require you to edit some settings in the head of lua files to work.  
-  
-Some of my scripts use script-messages for control instead of script-bindings to allow more dynamic commands to be parsed from parameters. You can call script-messages from any other lua script with mp.command("msg"), [mpv-repl](https://github.com/rossy/mpv-repl) by typing or just simply bind them to a key in input.conf.  
+How do I use them? Use default keybinds or bind your own in [input.conf](https://mpv.io/manual/stable/#input-conf).
+
+Some of my scripts require you to edit some settings in the head of lua files to work as intended(usually paths).  
+Some of my scripts use script-messages for control instead of script-bindings to allow more dynamic commands to be parsed from parameters. You can call script-messages from any other lua script with `mp.command("script-message _name_ _arg1_ _arg2_")`, [mpv-repl](https://github.com/rossy/mpv-repl) by typing or just simply bind them to a key in input.conf like this `H script-message addscrollingsub "hello world"`.  
 
 If you have problems with any of my scripts or have feature requests feel free to open an issue. Contributions are also welcome.  
 
@@ -35,6 +36,13 @@ If you have problems with any of my scripts or have feature requests feel free t
   `script-message trashfileonend true true` - deletefile[true, false], oneonly[true, false]  
   `mpv --script-opts=trashfileonend-deletefile=yes` - open mpv with deletefile enabled
   
+### [movingsubtitles](https://gist.github.com/jonniek/c3fed06cd7990518e8b2389f48ba3619)
+  Experimental nicovideo style scrolling subtitles/messages. There seems to be some kind of memoryleak that crashes the script after some time. Also has some hardcoded limits and string transformations that you might want to change. Messages can be sent with script-message from mpv scripts or IPC socket from other sources.  
+  `H script-message addscrollingsub "hello world"`  
+  `$ echo 'script-message addscrollingsub "hello world"' | socat - /tmp/mpvsocket`  
+  `mp.command("script-message addscrollingsub \"hello world\"")`
+  
+
 ## My bigger scripts
 ### [unseen-playlistmaker](https://github.com/donmaiq/unseen-playlistmaker)
   Keeps track of your watched files locally and loads unseen files from a specified directory into a playlist on keybind.  
@@ -49,6 +57,6 @@ If you have problems with any of my scripts or have feature requests feel free t
   
   &nbsp;  
 ---
->Permission to use, copy, modify, and/or distribute all of this software for any purpose with or without fee is hereby granted  
+>Permission to use, copy, modify, and/or distribute all of the above software for any purpose with or without fee is hereby granted  
 
 >All of the software is provided as is and the author disclaims all warranties with regard to this software including all implied warranties of merchantability and fitness. In no event shall the author be liable for any special, direct, indirect, or consequential damages or any damages whatsoever resulting from loss of use, data or profits, whether in an action of contract, negligence or other tortious action, arising out of or in connection with the use or performance of this software.
