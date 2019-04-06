@@ -55,8 +55,6 @@ If you have problems with any of my scripts or have feature requests feel free t
 ### [nextfile](https://github.com/donmaiq/mpv-nextfile)  
   Force open next or previous file in the currently playing files directory.  
   
-  &nbsp;  
----
 
 ## LICENCE
 Scripts in this repo: appendUrl under ISC and rest UNLICENCE
