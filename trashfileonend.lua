@@ -1,7 +1,3 @@
---
--- trashfileonend
--- Author: donmaiq
---
 --change settings keybind toggle in input.conf with -> KEY script-binding toggledeletefile
 --send your config during runtime with a keybind in input conf with -> alt+x script-message trashfileonend true true
 --where first argument is settings.deletefile variable, and second settings.deleteoneonly explained below

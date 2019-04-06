@@ -57,6 +57,6 @@ If you have problems with any of my scripts or have feature requests feel free t
   
   &nbsp;  
 ---
->Permission to use, copy, modify, and/or distribute all of the above software for any purpose with or without fee is hereby granted  
 
->All of the software is provided as is and the author disclaims all warranties with regard to this software including all implied warranties of merchantability and fitness. In no event shall the author be liable for any special, direct, indirect, or consequential damages or any damages whatsoever resulting from loss of use, data or profits, whether in an action of contract, negligence or other tortious action, arising out of or in connection with the use or performance of this software.
+## LICENCE
+Scripts in this repo: appendUrl under ISC and rest UNLICENCE

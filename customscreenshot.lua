@@ -1,6 +1,3 @@
---
--- Author: donmaiq
--- Description: 
 --   A script to save screenshots in different
 --   locations based on whatever conditions.
 --   Requires lua knowledge or some will to experiment.
