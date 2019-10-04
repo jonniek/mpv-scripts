@@ -58,7 +58,7 @@ end
 function get_clipboard(primary) 
   if platform == 'linux' then
     local args = { 'xclip', '-selection', primary and 'primary' or 'clipboard', '-out' }
-    return handleres(utils.subprocess({ args = args }), args, primary)
+    return handleres(utils.subprocess({ args = args, cancellable = false }), args, primary)
   elseif platform == 'windows' then
     local args = {
       'powershell', '-NoProfile', '-Command', [[& {
@@ -80,10 +80,10 @@ function get_clipboard(primary)
         [Console]::OpenStandardOutput().Write($u8clip, 0, $u8clip.Length)
       }]]
     }
-    return handleres(utils.subprocess({ args =  args }), args)
+    return handleres(utils.subprocess({ args =  args, cancellable = false }), args)
   elseif platform == 'macos' then
     local args = { 'pbpaste' }
-    return handleres(utils.subprocess({ args = args }), args)
+    return handleres(utils.subprocess({ args = args, cancellable = false }), args)
   end
   return nil
 end
