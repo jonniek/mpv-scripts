@@ -63,5 +63,5 @@ Experimental nicovideo style scrolling subtitles/messages. There seems to be som
 `$ echo 'script-message addscrollingsub "hello world"' | socat - /tmp/mpvsocket`  
 `mp.command("script-message addscrollingsub \"hello world\"")`
 
-## LICENCE
-Scripts in this repo: appendUrl under ISC and rest UNLICENCE
+## LICENSE
+Scripts in this repo: appendUrl under ISC and rest UNLICENSE
