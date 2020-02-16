@@ -13,7 +13,7 @@ If you have problems with any of my scripts or have feature requests feel free t
 Show playlist in a readable, navigatable and editable format as an osd_message. Cool quirks like filename formatting, saving, loading, shuffling sorting and more included. Now with the option to resolve urls to titles!
 
 ### [Filenavigator](https://github.com/donmaiq/mpv-filenavigator)
-Navigate your local system and open directories or files, or add files to your playlist. Linux/MacOS only.
+Navigate your local system and open directories or files, or add files to your playlist.
 
 ### [waifu2x](https://github.com/donmaiq/mpv-waifu2x)  
 Take screenshots or convert images with waifu2x upscalling algorithm.
