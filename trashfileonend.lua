@@ -58,6 +58,23 @@ function on_load()
   path = utils.join_path(utils.getcwd(), p)
 end
 
+function removefile_linux(file)
+  return { 'gio', 'trash', file }
+end
+
+function removefile_windows(file)
+  return {
+    'powershell', '-NoProfile', '-Command', [[& {
+          Trap {
+              Write-Error -ErrorRecord $_
+              Exit 1
+          }
+          Add-Type -AssemblyName Microsoft.VisualBasic
+          [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile("]]..file..[[",'OnlyErrorDialogs','SendToRecycleBin')
+      }]]
+  }
+end
+
 --run when any file is closed
 function on_close(reason)
   if settings.deletefile and path then
@@ -66,13 +83,21 @@ function on_close(reason)
       output(true)
     end
     if settings.accepted_reasons[reason.reason] then
-      local remove_function = linux and os.remove or removefile_windows
-      local success, error = remove_function(path)
-      if success then
+      local args_function = linux and removefile_linux or removefile_windows
+      local args = args_function(path)
+      local response = utils.subprocess({ args = args, cancellable = false })
+      if response.error == nil and response.status == 0 then
         msg.info('File removed: '..path)
       else
+        if response.error == nil then response.error = "" end
         msg.error("There was an error deleting the file: "..path)
-        if error then msg.error("  Error: "..error) end
+        msg.error("There was an error deleting the file: ")
+        msg.error("  Status: "..response.status)
+        msg.error("  Error: "..response.error)
+        msg.error("  stdout: "..response.stdout)
+        msg.error("Possible errors are permissions or failure in locating file")
+        msg.error("The command that produced the error was the following:")
+        msg.error("  "..utils.to_string(args))
       end
     else
       msg.info('Unallowed EOF: '..reason.reason)
@@ -108,27 +133,6 @@ end
 function outputhelper(string, silent)
   msg.info(string)
   if settings.osd_message and not silent then mp.osd_message(string) end
-end
-
--- windows cannot use os.remove with unicode characters
-function removefile_windows(file)
-  local args = {
-    'powershell', '-NoProfile', '-Command', [[& {
-          Trap {
-              Write-Error -ErrorRecord $_
-              Exit 1
-          }
-          Add-Type -AssemblyName Microsoft.VisualBasic
-          [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile("]]..file..[[",'OnlyErrorDialogs','SendToRecycleBin')
-      }]]
-  }
-  local response = utils.subprocess({ args = args, cancellable = false })
-  if response.error == nil and response.status == 0 then
-    return true, nil
-  else
-    if response.error == nil then response.error = "Unexpected error" end
-    return nil, response.error
-  end
 end
 
 --read settings from a script message
