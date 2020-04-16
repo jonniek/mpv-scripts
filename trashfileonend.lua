@@ -8,15 +8,20 @@ local msg = require 'mp.msg'
 local utils = require 'mp.utils'
 local settings = {
   --all settings values need to be true or false
-  --deletefile and deleteoneonly in this variable is the default behaviour, both will change when using toggle or message
+  --deletefile and deleteoneonly in this variable is the default behaviour of the script, both will change when using toggle or message
+
   --linux/windows/auto(empty string)
   system = "",
+
   --activate file removing, default is good to keep as false
   deletefile = false,
+
   --remove only one file(next closed file), changes deletefile to false after deleting one
   deleteoneonly = true,
+
   --display osd messages for toggles
   osd_message = true,
+
   --https://mpv.io/manual/stable/#lua-scripting-end-file
   --accepted EOF reasons to delete a file, change to false to disallow file deletion.
   --if a eof reason is not allowed and deleteoneonly is true it will trigger without deleting the file
@@ -41,10 +46,6 @@ if settings.system=="" then
   else
     linux = true
   end
-elseif settings.system:lower()=="linux" then
-  linux = true
-else
-  linux = false
 end
 
 --run when any file is opened
@@ -55,8 +56,6 @@ function on_load()
   if p:match("^%a%a+:%/%/") then path = nil ; return end
   --get always absolute path to file
   path = utils.join_path(utils.getcwd(), p)
-  --convert slashes to backslashes for windows
-  if linux==false then path = path:gsub("/", "\\") end
 end
 
 --run when any file is closed
@@ -67,20 +66,13 @@ function on_close(reason)
       output(true)
     end
     if settings.accepted_reasons[reason.reason] then
-      local rm = 'rm'
-      if not linux then rm = 'del' end
-      local response = utils.subprocess({ cancellable=false, args = { rm, path } })
-      if response.error == nil and response.status == 0 then
+      local remove_function = linux and os.remove or removefile_windows
+      local success, error = remove_function(path)
+      if success then
         msg.info('File removed: '..path)
       else
-        if response.error == nil then response.error = "" end
-        msg.error("There was an error deleting the file: ")
-        msg.error("  Status: "..response.status)
-        msg.error("  Error: "..response.error)
-        msg.error("  stdout: "..response.stdout)
-        msg.error("Possible errors are permissions or failure in locating file")
-        msg.error("The command that produced the error was the following:")
-        msg.error("  "..rm.." "..path)
+        msg.error("There was an error deleting the file: "..path)
+        if error then msg.error("  Error: "..error) end
       end
     else
       msg.info('Unallowed EOF: '..reason.reason)
@@ -118,6 +110,27 @@ function outputhelper(string, silent)
   if settings.osd_message and not silent then mp.osd_message(string) end
 end
 
+-- windows cannot use os.remove with unicode characters
+function removefile_windows(file)
+  local args = {
+    'powershell', '-NoProfile', '-Command', [[& {
+          Trap {
+              Write-Error -ErrorRecord $_
+              Exit 1
+          }
+          Add-Type -AssemblyName Microsoft.VisualBasic
+          [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile("]]..file..[[",'OnlyErrorDialogs','SendToRecycleBin')
+      }]]
+  }
+  local response = utils.subprocess({ args = args, cancellable = false })
+  if response.error == nil and response.status == 0 then
+    return true, nil
+  else
+    if response.error == nil then response.error = "Unexpected error" end
+    return nil, response.error
+  end
+end
+
 --read settings from a script message
 function trashsend(delete, single)
   settings.deletefile = ( delete:lower() == 'true' )
@@ -129,4 +142,3 @@ mp.register_script_message("trashfileonend", trashsend)
 mp.add_key_binding("ctrl+alt+x", "toggledeletefile", toggledelete)
 mp.register_event('file-loaded', on_load)
 mp.register_event('end-file', on_close)
-
