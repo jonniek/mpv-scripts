@@ -15,6 +15,9 @@ Show playlist in a readable, navigatable and editable format. Cool quirks like u
 ### [Filenavigator](https://github.com/jonniek/mpv-filenavigator)
 Navigate your local system and open directories or files, or add files to your playlist.
 
+### [mpv-remote](https://github.com/jonniek/mpv-remote)
+A super simple remote controller for mpv
+
 ### [Menu](https://github.com/jonniek/mpv-menu)
 0-dependency configurable command menu.
 
