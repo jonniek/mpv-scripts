@@ -70,5 +70,9 @@ Experimental nicovideo style scrolling subtitles/messages. There seems to be som
 `$ echo 'script-message addscrollingsub "hello world"' | socat - /tmp/mpvsocket`  
 `mp.command("script-message addscrollingsub \"hello world\"")`
 
+
+### [typescript template](https://github.com/jonniek/mpv-typescript-template)
+Do you want to create mpv-scripts with TypeScript? You can use this template to get started.  
+
 ## LICENSE
-Scripts in this repo: appendUrl under ISC and rest UNLICENSE
+Scripts in this repo: appendUrl under ISC and rest UNLICENSE. Linked repositories contain their respective licenses.
