@@ -3,7 +3,9 @@ A collection of all my mpv scripts.
 What are lua scripts? [Mpv.io lua documentation](https://mpv.io/manual/master/#lua-scripting)  
 Where should I put them? [Unix](https://mpv.io/manual/stable/#files) [Windows](https://mpv.io/manual/stable/#files-on-windows)  
 How do I use them? Use default keybinds or bind your own in [input.conf](https://mpv.io/manual/stable/#input-conf).  
-You can find more mpv scripts [here](https://github.com/mpv-player/mpv/wiki/User-Scripts)
+You can find more mpv scripts here:
+- [mpv-wiki](https://github.com/mpv-player/mpv/wiki/User-Scripts)
+- [awesome-mpv](https://github.com/stax76/awesome-mpv)
 
 Some of my scripts require you to edit some settings in the head of lua files to work as intended(usually paths).  
 Some of my scripts use script-messages for control instead of script-bindings to allow more dynamic commands to be parsed from parameters. You can call script-messages from any other lua script with `mp.command("script-message _name_ _arg1_ _arg2_")`, [mpv-repl](https://github.com/rossy/mpv-repl) by typing `script-message _name_ _arg1_ _arg2_`, my Menu script or just simply bind them to a key in input.conf `H script-message addscrollingsub "hello world"`.  
