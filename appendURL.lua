@@ -57,8 +57,13 @@ end
 
 function get_clipboard(primary) 
   if platform == 'linux' then
-    local args = { 'xclip', '-selection', primary and 'primary' or 'clipboard', '-out' }
-    return handleres(utils.subprocess({ args = args, cancellable = false }), args, primary)
+    if os.getenv("XDG_SESSION_TYPE") == "wayland" then
+      local args = { 'wl-paste' }
+      return handleres(utils.subprocess({ args = args, cancellable = false }), args)
+    else
+      local args = { 'xclip', '-selection', primary and 'primary' or 'clipboard', '-out' }
+      return handleres(utils.subprocess({ args = args, cancellable = false }), args, primary)
+    end
   elseif platform == 'windows' then
     local args = {
       'powershell', '-NoProfile', '-Command', [[& {
